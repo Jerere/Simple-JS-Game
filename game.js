@@ -1,26 +1,13 @@
 var player;
 var playerHeight = 30;
 var playerWidth = 30;
-var playerX = (600-playerWidth)/2; // player LOCATION X
-var playerY = (600-playerHeight)/2; // player LOCATION Y
+var playerX = (600 - playerWidth) / 2; // player LOCATION X
+var playerY = (600 - playerHeight) / 2; // player LOCATION Y
 var obstacles = [];
-
-document.addEventListener("mousemove", mouseMoveHandler, false);
-
-
-function mouseMoveHandler(e) {
-    var relativeX = e.clientX - gameArea.canvas.offsetLeft;
-    var relativeY = e.clientY - gameArea.canvas.offsetTop;
-
-    if(relativeX > 0 && relativeX < gameArea.canvas.width && relativeY > 0 && relativeY < gameArea.canvas.height) {
-        playerX = relativeX - playerWidth / 2;
-        playerY = relativeY - playerHeight / 2;
-    }
-}
-
-function startGame() {
-    gameArea.start();
-}
+var rightPressed = false;
+var leftPressed = false;
+var downPressed = false;
+var upPressed = false;
 
 var gameArea = {
     canvas : document.createElement("canvas"),
@@ -39,6 +26,56 @@ var gameArea = {
         clearInterval(this.interval);
     }
 }
+
+function startGame() {
+    gameArea.start();
+}
+
+function mouseMoveHandler(e) {
+    var relativeX = e.clientX - gameArea.canvas.offsetLeft;
+    var relativeY = e.clientY - gameArea.canvas.offsetTop;
+
+    if(relativeX > 0 && relativeX < gameArea.canvas.width && relativeY > 0 && relativeY < gameArea.canvas.height) {
+        playerX = relativeX - playerWidth / 2;
+        playerY = relativeY - playerHeight / 2;
+    }
+}
+
+function keyDownHandler(e) {
+    if (e.keyCode == '39') {
+        rightPressed = true;
+    }
+    else if (e.keyCode == '37') {
+        leftPressed = true;
+    }
+    else if (e.keyCode == '40') {
+        downPressed = true;
+    }
+    else if (e.keyCode == '38') {
+        upPressed = true;
+    }
+
+}
+
+function keyUpHandler(e) {
+    if (e.keyCode == '39') {
+        rightPressed = false;
+    }
+    else if (e.keyCode == '37') {
+        leftPressed = false;
+    }
+    else if (e.keyCode == '40') {
+        downPressed = false;
+    }
+    else if (e.keyCode == '38') {
+        upPressed = false;
+    }
+
+}
+
+document.addEventListener("mousemove", mouseMoveHandler, false);
+document.addEventListener("keydown", keyDownHandler, false);
+document.addEventListener("keyup", keyUpHandler, false);
 
 function drawPlayer() {
     ctx = gameArea.context;
@@ -104,6 +141,19 @@ function updategameArea() {
     }
 
     drawPlayer();
+
+    if (rightPressed && playerX < gameArea.canvas.width - playerWidth) {
+        playerX += 5;
+    }
+    else if (leftPressed && playerX > 0) {
+        playerX -= 5;
+    }
+    else if (downPressed && playerY < gameArea.canvas.height - playerHeight) {
+        playerY += 5;
+    }
+    else if (upPressed && playerY > 0) {
+        playerY -= 5;
+    }
 
 }
 
