@@ -8,16 +8,19 @@ var rightPressed = false;
 var leftPressed = false;
 var downPressed = false;
 var upPressed = false;
+var obstacleSpeed = -1;
+var obstacleInterval = 65;
+var gameScore;
 
 var gameArea = {
     canvas : document.createElement("canvas"),
     start : function() {
-        this.canvas.width = 600;
-        this.canvas.height = 600;
+        this.canvas.width = 800;
+        this.canvas.height = 800;
         this.context = this.canvas.getContext("2d");
         document.body.insertBefore(this.canvas, document.body.childNodes[0]);
         this.frameNum = 0;
-        this.interval = setInterval(updategameArea, 20);
+        this.interval = setInterval(updategameArea, 10);
     },
     clear : function() {
         this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
@@ -28,10 +31,11 @@ var gameArea = {
 }
 
 function startGame() {
+    gameScore = new component("200px", "Impact", "rgba(102, 127, 122, 0.20)", 50 , 750, "text");
     gameArea.start();
 }
 
-function mouseMoveHandler(e) {
+/* function mouseMoveHandler(e) {
     var relativeX = e.clientX - gameArea.canvas.offsetLeft;
     var relativeY = e.clientY - gameArea.canvas.offsetTop;
 
@@ -39,7 +43,7 @@ function mouseMoveHandler(e) {
         playerX = relativeX - playerWidth / 2;
         playerY = relativeY - playerHeight / 2;
     }
-}
+} */
 
 function keyDownHandler(e) {
     if (e.keyCode == '39') {
@@ -73,30 +77,32 @@ function keyUpHandler(e) {
 
 }
 
-document.addEventListener("mousemove", mouseMoveHandler, false);
+// document.addEventListener("mousemove", mouseMoveHandler, false);
 document.addEventListener("keydown", keyDownHandler, false);
 document.addEventListener("keyup", keyUpHandler, false);
 
 function drawPlayer() {
     ctx = gameArea.context;
-    ctx.beginPath();
-    ctx.rect(playerX, playerY, playerWidth, playerHeight);
     ctx.fillStyle = "black";
-    ctx.fill();
-    ctx.closePath();
+    ctx.fillRect(playerX, playerY, playerWidth, playerHeight);
 }
 
-function component(width, height, color, x, y) {
+function component(width, height, color, x, y, type) {
+    this.type = type;
+    this.gameScore = 0;
     this.width = width;
     this.height = height;
-    this.speedX = 0;
-    this.speedY = 0;
     this.x = x;
     this.y = y;
+    ctx = gameArea.context;
     this.update = function() {
-        ctx = gameArea.context;
         ctx.fillStyle = color;
         ctx.fillRect(this.x, this.y, this.width, this.height);
+    }
+    this.updateScore = function() {
+        ctx.font = this.width + " " + this.height;
+        ctx.fillStyle = color;
+        ctx.fillText(this.text, this.x, this.y);
     }
 }
 
@@ -117,8 +123,60 @@ function hitObject(other) {
     return crash;
 }
 
+function randomColor() {
+    var colorRan = Math.floor((Math.random() * 10000) + 20000).toString(16);
+    var color = '#000000'.slice(0, -colorRan.length) + colorRan;
+    return color;
+}
+
 function updategameArea() {
-    var x, y;
+    var x, y;   
+
+    gameArea.clear();
+    gameArea.frameNum += 1;
+
+    if (gameArea.frameNum == 1 || everyinterval(100)) {
+        obstacleSpeed += -0.1
+    }
+
+    if (gameArea.frameNum == 1 || everyinterval(500) && obstacleInterval > 10) {
+        obstacleInterval -= 5
+        console.log(obstacleInterval)
+    }
+
+    if (gameArea.frameNum == 1 || everyinterval(obstacleInterval)) {
+        var newObstacleWidth = 50
+        var newObstacleHeight = 50
+
+        // random value between canvas width
+        var randX = Math.floor(Math.random() * (gameArea.canvas.width - (2 * newObstacleWidth))) + newObstacleWidth; 
+        obstacles.push(new component(newObstacleWidth, newObstacleHeight, randomColor(), randX, gameArea.canvas.height));
+    }
+
+    gameScore.text= (gameArea.frameNum / 10).toFixed(0);
+    gameScore.updateScore();
+
+
+    for (i = 0; i < obstacles.length; i+= 1) {
+        obstacles[i].y += obstacleSpeed;
+        obstacles[i].update();
+    }
+
+    drawPlayer();
+
+    if (rightPressed && playerX < gameArea.canvas.width - playerWidth) {
+        playerX += 3;
+    }
+    else if (leftPressed && playerX > 0) {
+        playerX -= 3;
+    }
+    else if (downPressed && playerY < gameArea.canvas.height - playerHeight) {
+        playerY += 3;
+    }
+    else if (upPressed && playerY > 0) {
+        playerY -= 3;
+    }
+
     for(i = 0; i < obstacles.length; i+= 1) {
         if (hitObject(obstacles[i])) {
             gameArea.stop();
@@ -126,38 +184,11 @@ function updategameArea() {
         }
     }
 
-    gameArea.clear();
-    gameArea.frameNum += 1; // points?
-
-    if (gameArea.frameNum == 1 || everyinterval(120)) {
-        x = gameArea.canvas.width;
-        y = gameArea.canvas.height;
-        obstacles.push(new component(50, 50, "green", Math.floor(Math.random() * gameArea.canvas.width), gameArea.canvas.height));
-    }
-
-    for (i = 0; i < obstacles.length; i+= 1) {
-        obstacles[i].y += -1;
-        obstacles[i].update();
-    }
-
-    drawPlayer();
-
-    if (rightPressed && playerX < gameArea.canvas.width - playerWidth) {
-        playerX += 5;
-    }
-    else if (leftPressed && playerX > 0) {
-        playerX -= 5;
-    }
-    else if (downPressed && playerY < gameArea.canvas.height - playerHeight) {
-        playerY += 5;
-    }
-    else if (upPressed && playerY > 0) {
-        playerY -= 5;
-    }
-
 }
 
 function everyinterval(n) {
-    if ((gameArea.frameNum / n) % 1 == 0) {return true;}
+    if ((gameArea.frameNum / n) % 1 == 0) {
+        return true;
+    }
     return false;
 }
