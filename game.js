@@ -9,7 +9,7 @@ var leftPressed = false;
 var downPressed = false;
 var upPressed = false;
 var obstacleSpeed = -1;
-var obstacleInterval = 65;
+var obstacleInterval = 60; //60 is nice speed :)
 var gameScore;
 
 var gameArea = {
@@ -123,25 +123,18 @@ function hitObject(other) {
     return crash;
 }
 
-function randomColor() {
-    var colorRan = Math.floor((Math.random() * 10000) + 20000).toString(16);
-    var color = '#000000'.slice(0, -colorRan.length) + colorRan;
-    return color;
-}
-
 function updategameArea() {
     var x, y;   
 
     gameArea.clear();
-    gameArea.frameNum += 1;
+    gameArea.frameNum += 1;0
 
     if (gameArea.frameNum == 1 || everyinterval(100)) {
         obstacleSpeed += -0.1
     }
 
-    if (gameArea.frameNum == 1 || everyinterval(500) && obstacleInterval > 10) {
+    if (gameArea.frameNum == 1 || everyinterval(500) && obstacleInterval > 5) {
         obstacleInterval -= 5
-        console.log(obstacleInterval)
     }
 
     if (gameArea.frameNum == 1 || everyinterval(obstacleInterval)) {
@@ -149,7 +142,7 @@ function updategameArea() {
         var newObstacleHeight = 50
 
         // random value between canvas width
-        var randX = Math.floor(Math.random() * (gameArea.canvas.width - (2 * newObstacleWidth))) + newObstacleWidth; 
+        var randX = Math.floor(Math.random() * (gameArea.canvas.width - newObstacleWidth)) + newObstacleWidth /* - newObstacleWidth */;
         obstacles.push(new component(newObstacleWidth, newObstacleHeight, randomColor(), randX, gameArea.canvas.height));
     }
 
