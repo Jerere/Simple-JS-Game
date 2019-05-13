@@ -3,14 +3,16 @@ var playerHeight = 30;
 var playerWidth = 30;
 var playerX = (600 - playerWidth) / 2; // player LOCATION X
 var playerY = (600 - playerHeight) / 2; // player LOCATION Y
+var playerSpeed = 3;
 var obstacles = [];
 var rightPressed = false;
 var leftPressed = false;
 var downPressed = false;
 var upPressed = false;
 var obstacleSpeed = -1;
-var obstacleInterval = 60; //60 is nice speed :)
+var obstacleInterval = 60; //60 is nice speed to start :)
 var gameScore;
+var gameEnd = false;
 
 var gameArea = {
     canvas : document.createElement("canvas"),
@@ -27,6 +29,18 @@ var gameArea = {
     },
     stop : function() {
         clearInterval(this.interval);
+
+        setTimeout(function(){
+            document.getElementById("p1").innerHTML = "You got " + gameScore.text +" points";
+            var button = document.getElementById("buttonTry");
+            button.onclick = function() {
+                location.reload();
+                console.log("asd")
+            }
+            popUp();
+        }, 300);
+
+
     }
 }
 
@@ -124,7 +138,6 @@ function hitObject(other) {
 }
 
 function updategameArea() {
-    var x, y;   
 
     gameArea.clear();
     gameArea.frameNum += 1;0
@@ -133,7 +146,7 @@ function updategameArea() {
         obstacleSpeed += -0.1
     }
 
-    if (gameArea.frameNum == 1 || everyinterval(500) && obstacleInterval > 5) {
+    if (gameArea.frameNum == 1 || everyinterval(500) && obstacleInterval > 10) {
         obstacleInterval -= 5
     }
 
@@ -142,41 +155,40 @@ function updategameArea() {
         var newObstacleHeight = 50
 
         // random value between canvas width
-        var randX = Math.floor(Math.random() * (gameArea.canvas.width - newObstacleWidth)) + newObstacleWidth /* - newObstacleWidth */;
+        var randX = Math.floor(Math.random() * (gameArea.canvas.width - newObstacleWidth)) + newObstacleWidth - newObstacleWidth;
         obstacles.push(new component(newObstacleWidth, newObstacleHeight, randomColor(), randX, gameArea.canvas.height));
     }
 
     gameScore.text= (gameArea.frameNum / 10).toFixed(0);
     gameScore.updateScore();
 
-
     for (i = 0; i < obstacles.length; i+= 1) {
         obstacles[i].y += obstacleSpeed;
         obstacles[i].update();
     }
 
-    drawPlayer();
-
     if (rightPressed && playerX < gameArea.canvas.width - playerWidth) {
-        playerX += 3;
+        playerX += playerSpeed;
     }
     else if (leftPressed && playerX > 0) {
-        playerX -= 3;
+        playerX -= playerSpeed;
     }
     else if (downPressed && playerY < gameArea.canvas.height - playerHeight) {
-        playerY += 3;
+        playerY += playerSpeed;
     }
     else if (upPressed && playerY > 0) {
-        playerY -= 3;
+        playerY -= playerSpeed;
     }
+
+    drawPlayer();
 
     for(i = 0; i < obstacles.length; i+= 1) {
         if (hitObject(obstacles[i])) {
+            gameEnd = true;
             gameArea.stop();
             return;
         }
-    }
-
+    } 
 }
 
 function everyinterval(n) {
