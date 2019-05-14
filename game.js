@@ -35,7 +35,6 @@ var gameArea = {
             var button = document.getElementById("buttonTry");
             button.onclick = function() {
                 location.reload();
-                console.log("asd")
             }
             popUp();
         }, 300);
