@@ -1,5 +1,5 @@
 body {
-    font-family: Arial, Impact, sans-serif;
+    font-family: "Arial Black", "Impact";
 }
 
 canvas {
@@ -22,7 +22,7 @@ canvas {
     height: 100%; /* Full height */
     overflow: auto; /* Enable scroll if needed */
     background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    background-color: rgba(0,0,0,0.6); /* Black w/ opacity */
 }
 
 /* Modal Content */
@@ -31,13 +31,13 @@ canvas {
     background-color: #fefefe;
     margin: auto;
     padding: 0;
-    border: 1px solid #888;
-    width: 80%;
+    border: 2px solid grey;
+    width: 700px;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
     -webkit-animation-name: animatetop;
-    -webkit-animation-duration: 0.4s;
+    -webkit-animation-duration: 0.8s;
     animation-name: animatetop;
-    animation-duration: 0.4s
+    animation-duration: 0.8s
 }
 
 /* Add Animation */
@@ -51,44 +51,82 @@ canvas {
     to {top:0; opacity:1}
 }
 
-/* The Close Button */
-.close {
-    color: white;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-}
-
-.close:hover,
-.close:focus {
-    color: #000;
-    text-decoration: none;
-    cursor: pointer;
-}
-
-.modal-header {
-    padding: 2px 16px;
-    background-color: #5cb85c;
-    color: white;
-}
-
-.modal-body {padding: 2px 16px;}span
-
-.modal-footer {
-    padding: 2px 16px;
-    background-color: #5cb85c;
-    color: white;
-}
-
-.button {
+.modal-top {
+    height: 100px;
+    padding: 16px;
+    align-items: center;
+    display: flex;
     background-color: dodgerblue;
+    color: white;
+    font-size: 60px;
+
+}
+
+.modal-middle {
+    height: 100px;
+    padding: 16px;
+    align-items: center;
+    display: flex;
+    font-size: 60px;
+    background-color: orange;
+}
+
+.modal-middle2 {
+    padding: 16px;
+    height: 100px;
+    display: flex; 
+    justify-content: space-around;
+    align-items: center;
+    background-color: dimgray;
+}
+
+.input-div {
+    background-color: red;
+    padding-left: 0px;
+}
+
+input[type=text] {
+    background-color: white;
+    padding: 10px 5px;
+    border-radius: 4px;
+    font-size: 30px;
+}
+
+.modal-bottom {
+    height: 100px;
+    padding:  16px;
+    align-items: center;
+    display: flex;
+    background-color: darkred;
+    color: white;
+    font-size: 60px;
+}
+
+.buttonSave {
+    background-color: forestgreen;
     border: none;
     color: white;
-    padding: 15px 32px;
+    padding: 20px 32px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
     margin: 4px 2px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: "Arial Black";
+}
+
+.buttonTry {
+    background-color: dodgerblue;
+    border: none;
+    color: white;
+    font-family: "Arial Black";
+    border-radius: 4px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 60px;
+    margin: auto;
     cursor: pointer;
 }

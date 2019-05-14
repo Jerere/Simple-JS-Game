@@ -11,8 +11,8 @@ var downPressed = false;
 var upPressed = false;
 var obstacleSpeed = -1;
 var obstacleInterval = 60; //60 is nice speed to start :)
-var gameScore;
 var gameEnd = false;
+var gameScore;
 
 var gameArea = {
     canvas : document.createElement("canvas"),
@@ -38,7 +38,6 @@ var gameArea = {
             }
             popUp();
         }, 300);
-
 
     }
 }
@@ -158,7 +157,7 @@ function updategameArea() {
         obstacles.push(new component(newObstacleWidth, newObstacleHeight, randomColor(), randX, gameArea.canvas.height));
     }
 
-    gameScore.text= (gameArea.frameNum / 10).toFixed(0);
+    gameScore.text = (gameArea.frameNum / 10).toFixed(0);
     gameScore.updateScore();
 
     for (i = 0; i < obstacles.length; i+= 1) {

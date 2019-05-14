@@ -4,7 +4,7 @@
         <meta charset="utf-8" />
         <title>Video game</title>
         <link rel="stylesheet" href="style.css">
-        
+
     </head>
     <body onload="startGame()">
 
@@ -12,16 +12,22 @@
 
             <!-- Modal content -->
             <div class="modal-content">
-                <div class="modal-header">
-                    <span class="close">&times;</span>
-                    <h2>Game over :(</h2>
+                <div class="modal-top">
+                    <p>Game over :(</p>
                 </div>
-                <div class="modal-body">
-                    <p id="p1">nothing</p>
-                    <p id="p2">nothing</p>
+                <div class="modal-middle">
+                    <p id="p1"></p>
                 </div>
-                <div class="modal-footer">
-                    <button id="buttonTry" class="button">Try again?</button>
+                <div class="modal-middle2">
+                    <div class="input-div">
+                        <input id="nameinput" type="text" placeholder="Your name">
+                    </div>
+                    <div class="savebutton-div">
+                        <button id="buttonSave" class="buttonSave">Save score</button>
+                    </div>
+                </div>
+                <div class="modal-bottom">
+                    <button id="buttonTry" class="buttonTry">Play again</button>
                 </div>
             </div>
         </div>
