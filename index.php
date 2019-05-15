@@ -4,6 +4,7 @@
         <meta charset="utf-8" />
         <title>Video-Game</title>
         <link rel="stylesheet" href="style.css">
+        <link rel="icon" href="smiley-icon.png" type="image" sizes="32x32">
     </head>
     <body onload="startGame()">
         <div class="header">
