@@ -1,5 +1,6 @@
 body {
     font-family: "Arial Black", "Impact";
+    background-color: ghostwhite;
 }
 
 canvas {
@@ -8,14 +9,36 @@ canvas {
     margin-top: 5%;
     background:  #eee;
     border: 5px solid gray;
-    box-shadow: 0px 0px 50px 81px #eee;
+    box-shadow: 0px 0px 400px 20px #eee;
 }
+
+.header {
+    text-align: center;
+    font-size: 30px;
+}
+
+.button-scoreboard {
+    margin-top: -3%;
+    margin-right: 20px;
+    background-color: dodgerblue;
+    border: none;
+    color: white;
+    position: absolute;
+    right: 5px;
+    padding: 10px;
+    border-radius: 6px;
+    text-align: center;
+    font-size: 20px;
+    cursor: pointer;
+    font-family: "Arial Black";
+}
+
 
 .modal {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
     z-index: 1; /* Sit on top */
-    padding-top: 100px; /* Location of the box */
+    padding-top: 160px; /* Location of the box */
     left: 0;
     top: 0;
     width: 100%; /* Full width */
@@ -31,7 +54,8 @@ canvas {
     background-color: #fefefe;
     margin: auto;
     padding: 0;
-    border: 2px solid grey;
+    border: 2px solid white;
+    border-radius: 4px;
     width: 700px;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
     -webkit-animation-name: animatetop;
@@ -56,10 +80,9 @@ canvas {
     padding: 16px;
     align-items: center;
     display: flex;
-    background-color: dodgerblue;
+    background-color: rgba(0,0,0,0.5);
     color: white;
     font-size: 60px;
-
 }
 
 .modal-middle {
@@ -68,65 +91,113 @@ canvas {
     align-items: center;
     display: flex;
     font-size: 60px;
-    background-color: orange;
+    background-color: rgba(0,0,0,0.6);
 }
 
 .modal-middle2 {
     padding: 16px;
     height: 100px;
-    display: flex; 
-    justify-content: space-around;
+    display: flex;
     align-items: center;
-    background-color: dimgray;
+    background-color: rgba(0,0,0,0.7);
 }
 
-.input-div {
-    background-color: red;
-    padding-left: 0px;
+form {
+    display: flex;
 }
+
 
 input[type=text] {
     background-color: white;
     padding: 10px 5px;
-    border-radius: 4px;
+    border-radius: 6px;
     font-size: 30px;
-}
-
-.modal-bottom {
-    height: 100px;
-    padding:  16px;
-    align-items: center;
-    display: flex;
-    background-color: darkred;
-    color: white;
-    font-size: 60px;
+    float: left;
 }
 
 .buttonSave {
     background-color: forestgreen;
     border: none;
     color: white;
-    padding: 20px 32px;
+    padding: 16px 32px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
+    font-size: 20px;
     border-radius: 4px;
     cursor: pointer;
     font-family: "Arial Black";
+    margin-left: 20%;
+}
+
+
+.modal-bottom {
+    height: 100px;
+    padding:  16px;
+    align-items: center;
+    display: flex;
+    background-color: rgba(0,0,0,0.8);
+    color: white;
+    font-size: 60px;
 }
 
 .buttonTry {
     background-color: dodgerblue;
     border: none;
+    padding: 16px 32px;
     color: white;
-    font-family: "Arial Black";
     border-radius: 4px;
     text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 60px;
-    margin: auto;
+    font-size: 30px;
     cursor: pointer;
+    font-family: "Arial Black";
+}
+
+/* SCORETABLE / SCORETABLE / SCORETABLE / SCORETABLE */
+/* SCORETABLE / SCORETABLE / SCORETABLE / SCORETABLE */
+/* SCORETABLE / SCORETABLE / SCORETABLE / SCORETABLE */
+
+.scoreboard-button {
+   display: flex; 
+}
+
+.button-home {
+    background-color: dodgerblue;
+    border: none;
+    color: white;
+    position: absolute;
+    right: 5px;
+    padding: 10px;
+    margin: 5px;
+    border-radius: 6px;
+    text-align: center;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.scoreboard {
+  text-align: center;
+  font-size: 40px;
+}
+
+.header-text-scoreboard {
+  font-size: 80px;
+  margin-top: -60px;
+}
+
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 800px;
+  background-color: #9b9b9b;
+}
+
+td, th {
+  border: 2px solid black;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #eee;
 }

@@ -2,12 +2,16 @@
 <html>
     <head>
         <meta charset="utf-8" />
-        <title>Video game</title>
+        <title>Video-Game</title>
         <link rel="stylesheet" href="style.css">
-
     </head>
     <body onload="startGame()">
-
+        <div class="header">
+            <h1>Väistely Peli ☺</h1>
+        </div>
+        <div>
+            <button onClick="window.location='scoretable.php';" class="button-scoreboard">Scoreboard</button>
+        </div>
         <div id="myModal" class="modal">
 
             <!-- Modal content -->
@@ -19,12 +23,15 @@
                     <p id="p1"></p>
                 </div>
                 <div class="modal-middle2">
-                    <div class="input-div">
-                        <input id="nameinput" type="text" placeholder="Your name">
-                    </div>
-                    <div class="savebutton-div">
-                        <button id="buttonSave" class="buttonSave">Save score</button>
-                    </div>
+                    <form action="savescore.php" method="post">
+                        <div class="input-div">
+                            <input id="nameinput" name="playername" type="text" placeholder="Your name">
+                            <input id="score" type="hidden" name="score" value="">
+                        </div>
+                        <div class="savebutton-div">
+                            <input type="submit" name="submit" value="Save Score" id="buttonSave" class="buttonSave">
+                        </div>
+                    </form>
                 </div>
                 <div class="modal-bottom">
                     <button id="buttonTry" class="buttonTry">Play again</button>

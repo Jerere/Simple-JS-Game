@@ -32,6 +32,9 @@ var gameArea = {
 
         setTimeout(function(){
             document.getElementById("p1").innerHTML = "You got " + gameScore.text +" points";
+	    var scoreint = Number(gameScore.text);
+	    console.log(scoreint);
+	    document.getElementById("score").value = scoreint;
             var button = document.getElementById("buttonTry");
             button.onclick = function() {
                 location.reload();
