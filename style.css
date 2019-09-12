@@ -4,7 +4,9 @@ body {
 }
 
 canvas {
-    display: block; 
+    display: block;
+    width: 40%;
+    height: auto;
     margin: 0 auto;
     margin-top: 5%;
     background:  #eee;
@@ -18,19 +20,19 @@ canvas {
 }
 
 .button-scoreboard {
-    margin-top: -3%;
-    margin-right: 20px;
     background-color: dodgerblue;
     border: none;
     color: white;
-    position: absolute;
-    right: 5px;
-    padding: 10px;
+    position: fixed;
+    right: 10px;
+    bottom: 10px;
     border-radius: 6px;
     text-align: center;
     font-size: 20px;
     cursor: pointer;
     font-family: "Arial Black";
+    height: 5%;
+
 }
 
 
@@ -55,7 +57,8 @@ canvas {
     padding: 0;
     border: 2px solid white;
     border-radius: 4px;
-    width: 700px;
+    height: auto;
+    width: 40%;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
     -webkit-animation-name: animatetop;
     -webkit-animation-duration: 0.8s;
@@ -80,7 +83,7 @@ canvas {
     display: flex;
     background-color: rgba(0,0,0,0.5);
     color: white;
-    font-size: 60px;
+    font-size: 3em;
 }
 
 .modal-middle {
@@ -88,7 +91,7 @@ canvas {
     padding: 16px;
     align-items: center;
     display: flex;
-    font-size: 60px;
+    font-size: 3em;
     background-color: rgba(0,0,0,0.6);
 }
 
@@ -151,8 +154,6 @@ input[type=text] {
     font-family: "Arial Black";
 }
 
-/* SCORETABLE / SCORETABLE / SCORETABLE / SCORETABLE */
-/* SCORETABLE / SCORETABLE / SCORETABLE / SCORETABLE */
 /* SCORETABLE / SCORETABLE / SCORETABLE / SCORETABLE */
 
 .scoreboard-button {
