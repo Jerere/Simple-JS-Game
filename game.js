@@ -11,19 +11,21 @@ var upPressed = false;
 var obstacleSpeed = -1; // obastacles starting speed (minus speed because canvas draws from top)
 var obstacleInterval = 60; // time before pushing new obstacle (60 = every 0.6 second)
 var gameScore;
+var canvasWidth = window.outerWidth;
+var canvasHeight = window.outerHeight - 70;
 
 // gameArea contains start, clear and stop functions
 var gameArea = {
     canvas : document.createElement("canvas"), // creates canvas
-    start : function() { // starts game
-        this.canvas.width = 800;
-        this.canvas.height = 800;
+    start : function () { // starts game
+        this.canvas.width = canvasWidth;
+        this.canvas.height = canvasHeight;
         this.context = this.canvas.getContext("2d"); // container for graphics
         document.body.insertBefore(this.canvas, document.body.childNodes[0]);
         this.frameNum = 0; // number of current frame
         this.interval = setInterval(updategameArea, 10); // updates game every 10ms second
     },
-    clear : function() { // clears canvas (creates illusion that objects move)
+    clear : function () { // clears canvas (creates illusion that objects move)
         this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
     },
     stop : function() { // stops game
@@ -45,8 +47,8 @@ var gameArea = {
 
 function startGame() { // function called when index.php is loaded
     // component that draws score to bottom left corner
-    gameScore = new component("200px", "Impact", "rgba(102, 127, 122, 0.20)", 50 , 750, "text");
-    gameArea.start();
+    gameScore = new component("200px", "Impact", "rgba(102, 127, 122, 0.20)", (canvasWidth * 0.05), (canvasHeight * 0.95), "text");
+    gameArea.start();	
 }
 
 // mouse move ability (too fast and makes game buggy)
