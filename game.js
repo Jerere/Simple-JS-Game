@@ -8,11 +8,12 @@ var rightPressed = false; // keyboard booleans
 var leftPressed = false;
 var downPressed = false;
 var upPressed = false;
+var useristoucginh = false;
 var obstacleSpeed = -2; // obastacles starting speed (minus speed because canvas draws from top)
-var obstacleInterval = 50; // time before pushing new obstacle (60 = every 0.6 second)
+var obstacleInterval; // time before pushing new obstacle (60 = every 0.6 second)
 var gameScore;
-var canvasWidth = window.outerWidth;
-var canvasHeight = window.outerHeight - 70;
+var canvasWidth;
+var canvasHeight;
 
 // gameArea contains start, clear and stop functions
 var gameArea = {
@@ -47,6 +48,7 @@ var gameArea = {
 
 function startGame() { // function called when index.php is loaded
 	// component that draws score to bottom left corner
+	config();
 	gameScore = new component("200px", "Impact", "rgba(102, 127, 122, 0.20)", (canvasWidth * 0.05), (canvasHeight * 0.95), "text");
 	gameArea.start();
 }
@@ -77,10 +79,25 @@ function keyUpHandler(e) {
 	}
 }
 
-// events that check if key pressed or not
-// document.addEventListener("mousemove", mouseMoveHandler, false);
+// eventListeners that check if key pressed or not
 document.addEventListener("keydown", keyDownHandler, false);
 document.addEventListener("keyup", keyUpHandler, false);
+
+// eventListeners that check wich side the display is pressed or not
+document.addEventListener('touchstart', function (e) {
+	var clientX = e.touches[0].clientX;
+	if (clientX < (canvasWidth / 2)) {
+		leftPressed = true;
+	} else {
+		rightPressed = true;
+	}
+}, false);
+
+document.addEventListener('touchend', function (e) {
+	leftPressed = false;
+	rightPressed = false;
+}, false);
+
 
 // draws player
 function drawPlayer() {
@@ -149,7 +166,7 @@ function updategameArea() {
 	if (gameArea.frameNum == 1 || everyinterval(100)) { // increases obstalce speed every 100 interval
 		obstacleSpeed += -0.1
 	}
-	
+
 	// pushes new obstalces from bottom of the canvas
 	if (gameArea.frameNum == 1 || everyinterval(obstacleInterval)) {
 		var newObstacleWidth = 50
