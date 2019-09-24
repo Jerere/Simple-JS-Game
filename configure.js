@@ -6,7 +6,7 @@ function config() {
 		console.log("Mobile");
 		canvasWidth = window.outerWidth;
 		canvasHeight = window.outerHeight;
-		obstacleInterval = 70;
+		obstacleInterval = 80;
 
 	} else if (detect.tablet()) {
 		console.log("Tablet");

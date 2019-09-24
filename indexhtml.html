@@ -1,52 +1,56 @@
 <!DOCTYPE html>
 <html>
-    <head>
-		<meta name="viewport" content= "width=device-width, user-scalable=no">
-        <meta charset="utf-8" />
-        <title>Video-Game</title>
-        <link rel="stylesheet" href="style.css">
-        <link rel="icon" href="smiley-icon.png" type="image" sizes="32x32">
-    </head>
-    <body onload="startGame()">
-		<!--
+
+<head>
+	<meta name="viewport" content="width=device-width, user-scalable=no">
+	<meta charset="utf-8" />
+	<title>Video-Game</title>
+	<link rel="stylesheet" href="style.css">
+	<link rel="icon" href="smiley-icon.png" type="image" sizes="32x32">
+	<link href="https://fonts.googleapis.com/css?family=Titillium+Web:400,600,700,900&display=swap" rel="stylesheet">
+</head>
+
+<body onload="startGame()">
+	<!--
         <div>
             <button onClick="window.location='scoretable.php';" class="button-scoreboard">Scoreboard</button>
         </div>
 		//-->
 
-		
-        <div id="myModal" class="modal">
 
-            <!-- Modal content -->
-            <div class="modal-content">
-                <div class="modal-top">
-                    <p>Game over :(</p>
-                </div>
-                <div class="modal-middle">
-                    <p id="p1"></p>
-                </div>
-                <div class="modal-middle2">
-                    <form action="savescore.php" method="post">
-                        <div class="input-div">
-                            <input id="nameinput" name="playername" type="text" placeholder="Your name">
-                            <input id="score" type="hidden" name="score" value="">
-                        </div>
-                        <div class="savebutton-div">
-                            <input type="submit" name="submit" value="Save Score" id="buttonSave" class="buttonSave">
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-bottom">
-                    <button id="buttonTry" class="buttonTry">Play again</button>
-                </div>
-            </div>
-        </div>
+	<div id="myModal" class="modal">
 
-        <script src="game.js"></script>
-        <script src="colorShift.js"></script>
-        <script src="popup.js"></script>
-		<script src="mobile-detect.js"></script>
-		<script src="configure.js"></script>
+		<!-- Modal content -->
+		<div class="modal-content">
+			<div class="modal-top">
+				<p>Game over :(</p>
+			</div>
+			<div class="modal-middle">
+				<p id="p1"></p>
+			</div>
+			<div class="modal-middle2">
+				<form action="savescore.php" method="post">
+					<div class="input-div">
+						<input id="nameinput" name="playername" type="text" placeholder="Your name">
+						<input id="score" type="hidden" name="score" value="">
+					</div>
+					<div class="savebutton-div">
+						<input type="submit" name="submit" value="Save Score" id="buttonSave" class="buttonSave">
+					</div>
+				</form>
+			</div>
+			<div class="modal-bottom">
+				<button id="buttonTry" class="buttonTry">Play again</button>
+			</div>
+		</div>
+	</div>
 
-    </body>
+	<script src="game.js"></script>
+	<script src="colorShift.js"></script>
+	<script src="popup.js"></script>
+	<script src="mobile-detect.js"></script>
+	<script src="configure.js"></script>
+
+</body>
+
 </html>

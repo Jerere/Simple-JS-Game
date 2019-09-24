@@ -1,5 +1,5 @@
 body {
-	font-family: "Arial Black", "Impact";
+	font-family: 'Titillium Web', sans-serif;
 	background-color: ghostwhite;
 	overflow: hidden;
 	height: 100%;
@@ -21,7 +21,6 @@ canvas {
 	text-align: center;
 	font-size: 20px;
 	cursor: pointer;
-	font-family: "Arial Black";
 	height: 5%;
 
 }
@@ -42,6 +41,7 @@ canvas {
 .modal-content {
 	position: relative;
 	background-color: #fefefe;
+	font-size: 3em;
 	margin: auto;
 	padding: 0;
 	width: 700px;
@@ -79,26 +79,27 @@ canvas {
 }
 
 .modal-top {
-	height: 80px;
-	padding: 16px;
+	height: 2em;
+	padding: 10px;
 	align-items: center;
 	display: flex;
 	background-color: rgba(0, 0, 0, 0.5);
 	color: white;
-	font-size: 3em;
+	font-weight: 600;
 }
 
 .modal-middle {
-	height: 80; 
-	padding: 16px;
+	height: 2em;
+	padding: 10px;
 	align-items: center;
 	display: flex;
-	font-size: 3em;
 	background-color: rgba(0, 0, 0, 0.6);
+	font-weight: 600;
 }
 
 .modal-middle2 {
-	padding: 16px;
+	height: 2em;
+	padding: 10px;
 	display: flex;
 	align-items: center;
 	background-color: rgba(0, 0, 0, 0.7);
@@ -106,42 +107,47 @@ canvas {
 
 form {
 	display: flex;
+	align-items: center;
 	width: 100%;
+	height: 100%;
 }
 
 
 input[type=text] {
-	background-color: white;
-    padding: 10px 5px;
-    border-radius: 6px;
-    font-size: 30px;
-    float: left;
+	width: 95%;
+	display: inline-block;
+	padding: 10px 5px;
+	border-radius: 6px;
+	border: none;
+	font-size: 0.7em;
+	box-sizing: border-box
 }
 
-.buttonSave {
-    background-color: forestgreen;
-    border: none;
-    color: white;
-    padding: 16px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 20px;
-    border-radius: 4px;
-    cursor: pointer;
-    font-family: "Arial Black";
-    margin-left: 20%;
+input[type=submit] {
+	display: inline-block;
+	background-color: forestgreen;
+	border: none;
+	color: white;
+	padding: 0.6em 1em;
+	text-decoration: none;
+	font-size: 0.5em;
+	border-radius: 6px;
+	cursor: pointer;
+	font-weight: 900;
+}
+input[type=submit]:hover {
+  background-color: rgb(34, 125, 34);
 }
 
 
 .modal-bottom {
-	height: 100px;
-	padding: 16px;
+	height: 2em;
+	padding: 10px;
 	align-items: center;
 	display: flex;
 	background-color: rgba(0, 0, 0, 0.8);
 	color: white;
-	font-size: 60px;
+	font-size: 50px;
 }
 
 .buttonTry {
@@ -149,11 +155,45 @@ input[type=text] {
 	border: none;
 	padding: 16px 32px;
 	color: white;
-	border-radius: 4px;
+	border-radius: 6px;
 	text-align: center;
 	font-size: 30px;
 	cursor: pointer;
-	font-family: "Arial Black";
+	font-weight: 900;
+}
+
+.buttonTry:hover {
+  background-color: rgb(0, 112, 222);
+}
+
+
+@media only screen and (max-width: 720px) {
+	.modal {
+		padding-top: 10%;
+	}
+
+	.modal-content {
+		width: 90%;
+	}
+
+	.modal-middle {
+		font-size: 0.7em;
+	}
+
+	input[type=text] {
+		padding: 10px 5px;
+		border-radius: 6px;
+		font-size: 0.5em;
+	}
+
+	input[type=submit] {
+		padding: 0.6em 0.4em;
+		font-size: 0.4em;
+	}
+
+	.modal-bottom {
+		justify-content: center;
+	}
 }
 
 
@@ -188,7 +228,6 @@ input[type=text] {
 }
 
 table {
-	font-family: arial, sans-serif;
 	border-collapse: collapse;
 	width: 800px;
 	background-color: #9b9b9b;

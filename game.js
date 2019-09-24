@@ -27,7 +27,7 @@ var gameArea = {
 		this.interval = setInterval(updategameArea, 10); // updates game every 10ms second
 	},
 	clear: function () { // clears canvas (creates illusion that objects move)
-		this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+		this.context.clearRect(0, 10, this.canvas.width, this.canvas.height - 20);
 	},
 	stop: function () { // stops game
 		clearInterval(this.interval);
@@ -49,7 +49,7 @@ var gameArea = {
 function startGame() { // function called when index.php is loaded
 	// component that draws score to bottom left corner
 	config();
-	gameScore = new component("200px", "Impact", "rgba(102, 127, 122, 0.20)", (canvasWidth * 0.05), (canvasHeight * 0.95), "text");
+	gameScore = new component("900 200px", "Titillium Web", "rgba(102, 127, 122, 0.20)", (canvasWidth * 0.05), (canvasHeight * 0.95), "text");
 	gameArea.start();
 }
 
