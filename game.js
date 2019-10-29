@@ -1,5 +1,5 @@
-var playerHeight = 30;
-var playerWidth = 30;
+var playerHeight = 50;
+var playerWidth = 50;
 var playerX = (window.outerWidth / 2) - playerWidth; // player starting location on X-axis
 var playerY = (window.outerHeight / 3) - playerHeight; // player starting location on Y-axis
 var playerSpeed = 3; // player speed (3 = 3 pixels per update)
@@ -12,6 +12,7 @@ var useristoucginh = false;
 var obstacleSpeed = -2; // obastacles starting speed (minus speed because canvas draws from top)
 var obstacleInterval; // time before pushing new obstacle (60 = every 0.6 second)
 var gameScore;
+var gameTitle = "Väistelypeli";
 var canvasWidth;
 var canvasHeight;
 
@@ -24,10 +25,10 @@ var gameArea = {
 		this.context = this.canvas.getContext("2d"); // container for graphics
 		document.body.insertBefore(this.canvas, document.body.childNodes[0]);
 		this.frameNum = 0; // number of current frame
-		this.interval = setInterval(updategameArea, 10); // updates game every 10ms second
+		this.interval = setInterval(updategameArea, 10); // updates game every Xms second
 	},
 	clear: function () { // clears canvas (creates illusion that objects move)
-		this.context.clearRect(0, 10, this.canvas.width, this.canvas.height - 20);
+		this.context.clearRect(0, 10, this.canvas.width, this.canvas.height);
 	},
 	stop: function () { // stops game
 		clearInterval(this.interval);
@@ -47,9 +48,10 @@ var gameArea = {
 }
 
 function startGame() { // function called when index.php is loaded
-	// component that draws score to bottom left corner
 	config();
-	gameScore = new component("900 200px", "Titillium Web", "rgba(102, 127, 122, 0.20)", (canvasWidth * 0.05), (canvasHeight * 0.95), "text");
+	// component that draws score to bottom left corner
+	gameScore = new component("900 200px", "Titillium Web", "rgba(102, 127, 122, 0.3)", (canvasWidth * 0.03), (canvasHeight * 0.95), "text");
+	gameName = new component("900 50px", "Titillium Web", "rgba(102, 127, 122, 0.3)", (canvasWidth * 0.03), (canvasHeight * 0.1), "text");
 	gameArea.start();
 }
 
@@ -98,18 +100,20 @@ document.addEventListener('touchend', function (e) {
 	rightPressed = false;
 }, false);
 
-
 // draws player
 function drawPlayer() {
 	ctx = gameArea.context;
-	ctx.fillStyle = "black"; // fills player with color
-	ctx.fillRect(playerX, playerY, playerWidth, playerHeight); // draws player
+	const image = document.getElementById("image");
+	ctx.drawImage(image, playerX, playerY, playerWidth, playerHeight);
+	//ctx.fillStyle = "black"; // fills player with color
+	//ctx.fillRect(playerX, playerY, playerWidth, playerHeight); // draws player
 
 }
 // component constructor 
 function component(width, height, color, x, y, type) {
 	this.type = type; // for text components
 	this.gameScore = 0;
+	this.gameName = "";
 	this.width = width;
 	this.height = height;
 	this.x = x;
@@ -119,7 +123,7 @@ function component(width, height, color, x, y, type) {
 		ctx.fillStyle = color; // component color 
 		ctx.fillRect(this.x, this.y, this.width, this.height); // draws component
 	}
-	this.updateScore = function () { // updates score text
+	this.updateText = function () { // updates score text
 		ctx.font = this.width + " " + this.height; // font attributes
 		ctx.fillStyle = color; // text color 
 		ctx.fillText(this.text, this.x, this.y); // draws the score text
@@ -178,7 +182,10 @@ function updategameArea() {
 	}
 
 	gameScore.text = (gameArea.frameNum / 10).toFixed(0); // adds 1 point to score
-	gameScore.updateScore(); // updates score text
+	gameScore.updateText(); // updates score text
+
+	gameName.text = gameTitle;
+	gameName.updateText();
 
 	for (i = 0; i < obstacles.length; i += 1) { // updates obstacles to new positons
 		obstacles[i].y += obstacleSpeed;
