@@ -1,5 +1,7 @@
 var playerHeight = 50;
 var playerWidth = 50;
+var obstacleHeight = 80;
+var obstacleWidth = 80;
 var playerX = (window.outerWidth / 2) - playerWidth; // player starting location on X-axis
 var playerY = (window.outerHeight / 3) - playerHeight; // player starting location on Y-axis
 var playerSpeed = 3; // player speed (3 = 3 pixels per update)
@@ -12,9 +14,10 @@ var useristoucginh = false;
 var obstacleSpeed = -2; // obastacles starting speed (minus speed because canvas draws from top)
 var obstacleInterval; // time before pushing new obstacle (60 = every 0.6 second)
 var gameScore;
-var gameTitle = "Väistelypeli";
+var gameTitle = "Väistelypeli Christmas edition";
 var canvasWidth;
 var canvasHeight;
+var presentID = ["present_1", "present_2", "present_3"];
 
 // gameArea contains start, clear and stop functions
 var gameArea = {
@@ -28,7 +31,7 @@ var gameArea = {
 		this.interval = setInterval(updategameArea, 10); // updates game every Xms second
 	},
 	clear: function () { // clears canvas (creates illusion that objects move)
-		this.context.clearRect(0, 10, this.canvas.width, this.canvas.height);
+		this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
 	},
 	stop: function () { // stops game
 		clearInterval(this.interval);
@@ -103,10 +106,10 @@ document.addEventListener('touchend', function (e) {
 // draws player
 function drawPlayer() {
 	ctx = gameArea.context;
-	const image = document.getElementById("image");
+	const image = document.getElementById("present_1");
 	ctx.drawImage(image, playerX, playerY, playerWidth, playerHeight);
-	//ctx.fillStyle = "black"; // fills player with color
-	//ctx.fillRect(playerX, playerY, playerWidth, playerHeight); // draws player
+	// ctx.fillStyle = "black"; // fills player with color
+	// ctx.fillRect(playerX, playerY, playerWidth, playerHeight); // draws player
 
 }
 // component constructor 
@@ -120,12 +123,14 @@ function component(width, height, color, x, y, type) {
 	this.y = y;
 	ctx = gameArea.context;
 	this.update = function () { // updates component to new position
-		ctx.fillStyle = color; // component color 
-		ctx.fillRect(this.x, this.y, this.width, this.height); // draws component
+        // ctx.fillStyle = color; // component color
+        const image = document.getElementById(color);
+        ctx.drawImage(image, this.x, this.y, this.width, this.height);
+		// ctx.fillRect(this.x, this.y, this.width, this.height); // draws component
 	}
 	this.updateText = function () { // updates score text
 		ctx.font = this.width + " " + this.height; // font attributes
-		ctx.fillStyle = color; // text color 
+		ctx.fillStyle = color; // text color
 		ctx.fillText(this.text, this.x, this.y); // draws the score text
 	}
 }
@@ -173,12 +178,14 @@ function updategameArea() {
 
 	// pushes new obstalces from bottom of the canvas
 	if (gameArea.frameNum == 1 || everyinterval(obstacleInterval)) {
-		var newObstacleWidth = 50
-		var newObstacleHeight = 50
+		var newObstacleWidth = 80;
+		var newObstacleHeight = 80;
 
 		// random value between canvas width
 		var randX = Math.floor(Math.random() * (gameArea.canvas.width - newObstacleWidth)) + newObstacleWidth - newObstacleWidth;
-		obstacles.push(new component(newObstacleWidth, newObstacleHeight, randomColor(), randX, gameArea.canvas.height));
+        var randID = Math.floor(Math.random() * 3);
+        const image =(presentID[randID])
+		obstacles.push(new component(newObstacleWidth, newObstacleHeight, image, randX, gameArea.canvas.height));
 	}
 
 	gameScore.text = (gameArea.frameNum / 10).toFixed(0); // adds 1 point to score

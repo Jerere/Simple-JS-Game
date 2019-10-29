@@ -1,7 +1,6 @@
 var detect = new MobileDetect(window.navigator.userAgent);
 
 function config() {
-	//console.log(detect.isPhoneSized())
 	if (detect.isPhoneSized()) {
 		console.log("Mobile");
 		canvasWidth = window.outerWidth;
