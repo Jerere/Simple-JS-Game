@@ -1,17 +1,21 @@
+@import "snowflakeloop.css";
+
 body {
+	width: 100vw;
+	height: 100vh;
+	position: relative;
 	font-family: 'Titillium Web', sans-serif;
 	background-color: ghostwhite;
 	overflow: hidden;
-	height: 100%;
 }
 
 canvas {
 	width: 100%;
-	background: #eee;
+	background: #e8d8d8;
 }
 
 .button-scoreboard {
-	background-color: dodgerblue;
+	background-color: darkgreen;
 	border: none;
 	color: white;
 	position: fixed;
@@ -22,7 +26,6 @@ canvas {
 	font-size: 20px;
 	cursor: pointer;
 	height: 5%;
-
 }
 
 
@@ -134,8 +137,9 @@ input[type=submit] {
 	cursor: pointer;
 	font-weight: 900;
 }
+
 input[type=submit]:hover {
-  background-color: rgb(34, 125, 34);
+	background-color: rgb(34, 125, 34);
 }
 
 
@@ -162,7 +166,7 @@ input[type=submit]:hover {
 }
 
 .buttonTry:hover {
-  background-color: rgb(0, 112, 222);
+	background-color: rgb(0, 112, 222);
 }
 
 
@@ -193,6 +197,32 @@ input[type=submit]:hover {
 	.modal-bottom {
 		justify-content: center;
 	}
+}
+
+.snowflake {
+	--size: 1vw;
+	width: var(--size);
+	height: var(--size);
+	background: #f5f5f5;
+	border-radius: 50%;
+	position: absolute;
+	z-index: 4;
+	top: -5vh;
+}
+
+@keyframes snowfall {
+	0% {
+		transform: translate3d(var(--left-ini), 0, 0);
+	}
+
+	100% {
+		transform: translate3d(var(--left-end), 110vh, 0);
+	}
+}
+
+/* added small blur every 6 snowflakes*/
+.snowflake:nth-child(6n) {
+	filter: blur(1px);
 }
 
 

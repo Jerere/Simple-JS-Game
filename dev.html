@@ -4,7 +4,7 @@
 <head>
 	<meta name="viewport" content="width=device-width, user-scalable=no">
 	<meta charset="utf-8" />
-	<title>Video-Game</title>
+	<title>Vaistelypeli</title>
 	<link rel="stylesheet" href="style.css">
 	<link rel="icon" href="smiley-icon.png" type="image" sizes="32x32">
 	<link href="https://fonts.googleapis.com/css?family=Titillium+Web:400,600,700,900&display=swap" rel="stylesheet">
@@ -20,6 +20,7 @@
 	<img id="present_1" src="img/present_1.png" width="100" height="100" style="display: none">
     <img id="present_2" src="img/present_2.png" width="100" height="100" style="display: none">
     <img id="present_3" src="img/present_3.png" width="100" height="100" style="display: none">
+	<img id="kuutio_raino" src="img/kuutio_raino.png" width="100" height="100" style="display: none">
 	<div id="myModal" class="modal">
 
 		<!-- Modal content -->
@@ -45,6 +46,9 @@
 				<button id="buttonTry" class="buttonTry">Play again</button>
 			</div>
 		</div>
+	</div>
+	<div>
+		<button onClick="window.location='scoretable.php';" class="button-scoreboard">Scoreboard</button>
 	</div>
 
 	<script src="game.js"></script>

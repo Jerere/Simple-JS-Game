@@ -1,7 +1,7 @@
-var playerHeight = 50;
-var playerWidth = 50;
-var obstacleHeight = 80;
-var obstacleWidth = 80;
+var playerHeight = 60;
+var playerWidth = 60;
+var obstacleHeight = 60;
+var obstacleWidth = 60;
 var playerX = (window.outerWidth / 2) - playerWidth; // player starting location on X-axis
 var playerY = (window.outerHeight / 3) - playerHeight; // player starting location on Y-axis
 var playerSpeed = 3; // player speed (3 = 3 pixels per update)
@@ -14,7 +14,7 @@ var useristoucginh = false;
 var obstacleSpeed = -2; // obastacles starting speed (minus speed because canvas draws from top)
 var obstacleInterval; // time before pushing new obstacle (60 = every 0.6 second)
 var gameScore;
-var gameTitle = "Väistelypeli Christmas edition";
+var gameTitle = "Väistelypeli";
 var canvasWidth;
 var canvasHeight;
 var presentID = ["present_1", "present_2", "present_3"];
@@ -55,6 +55,7 @@ function startGame() { // function called when index.php is loaded
 	// component that draws score to bottom left corner
 	gameScore = new component("900 200px", "Titillium Web", "rgba(102, 127, 122, 0.3)", (canvasWidth * 0.03), (canvasHeight * 0.95), "text");
 	gameName = new component("900 50px", "Titillium Web", "rgba(102, 127, 122, 0.3)", (canvasWidth * 0.03), (canvasHeight * 0.1), "text");
+	createSnowFlakes();
 	gameArea.start();
 }
 
@@ -106,12 +107,31 @@ document.addEventListener('touchend', function (e) {
 // draws player
 function drawPlayer() {
 	ctx = gameArea.context;
-	const image = document.getElementById("present_1");
-	ctx.drawImage(image, playerX, playerY, playerWidth, playerHeight);
+	const image = document.getElementById("kuutio_raino");
+    ctx.save();
+	roundedImage(playerX, playerY, playerWidth, playerHeight, 8);
+	ctx.clip();
+	ctx.drawImage(image,playerX, playerY, playerWidth, playerHeight);
+	ctx.restore();
+
 	// ctx.fillStyle = "black"; // fills player with color
 	// ctx.fillRect(playerX, playerY, playerWidth, playerHeight); // draws player
-
 }
+
+function roundedImage(x, y, width, height, radius) {
+    ctx.beginPath();
+    ctx.moveTo(x + radius, y);
+    ctx.lineTo(x + width - radius, y);
+    ctx.quadraticCurveTo(x + width, y, x + width, y + radius);
+    ctx.lineTo(x + width, y + height - radius);
+    ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
+    ctx.lineTo(x + radius, y + height);
+    ctx.quadraticCurveTo(x, y + height, x, y + height - radius);
+    ctx.lineTo(x, y + radius);
+    ctx.quadraticCurveTo(x, y, x + radius, y);
+    ctx.closePath();
+}
+
 // component constructor 
 function component(width, height, color, x, y, type) {
 	this.type = type; // for text components
@@ -182,10 +202,10 @@ function updategameArea() {
 		var newObstacleHeight = 80;
 
 		// random value between canvas width
-		var randX = Math.floor(Math.random() * (gameArea.canvas.width - newObstacleWidth)) + newObstacleWidth - newObstacleWidth;
+		var randX = Math.floor(Math.random() * (gameArea.canvas.width - obstacleWidth));
         var randID = Math.floor(Math.random() * 3);
         const image =(presentID[randID])
-		obstacles.push(new component(newObstacleWidth, newObstacleHeight, image, randX, gameArea.canvas.height));
+		obstacles.push(new component(obstacleWidth, obstacleHeight, image, randX, gameArea.canvas.height));
 	}
 
 	gameScore.text = (gameArea.frameNum / 10).toFixed(0); // adds 1 point to score
@@ -225,4 +245,13 @@ function everyinterval(n) { // returns true if the current framenumber correspon
 		return true;
 	}
 	return false;
+}
+
+
+function createSnowFlakes() {
+	for (let i = 0; i < 50; i++) {
+		const div = document.createElement("div");
+		div.className="snowflake";
+		document.body.appendChild(div);
+	  }
 }

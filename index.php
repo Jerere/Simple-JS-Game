@@ -7,9 +7,6 @@
         <link rel="icon" href="smiley-icon.png" type="image" sizes="32x32">
     </head>
     <body onload="startGame()">
-        <div class="header">
-            <h1>Väistely Peli ☺</h1>
-        </div>
         <div>
             <button onClick="window.location='scoretable.php';" class="button-scoreboard">Scoreboard</button>
         </div>
